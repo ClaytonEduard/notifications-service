@@ -1,0 +1,2 @@
+@m
+export class DatabaseModule{}
