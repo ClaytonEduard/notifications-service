@@ -7,5 +7,6 @@ export abstract class NotificationsRepository {
     abstract findById(notificationId: string): Promise<Notification | null>;
     // metodo de cancelar
     abstract save(notification: Notification): Promise<void>;
-    abstract countManyByRecipientId(): Promise<number>;
+    abstract countManyByRecipientId(recipientId: string): Promise<number>;
+    abstract findManyByRecipientId(recipientId: string): Promise<Notification[]>;
 }

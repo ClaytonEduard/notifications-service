@@ -8,7 +8,7 @@ export interface NotificationProps {
     category: string;
     // a interogação significa opcional
     readAt?: Date | null; // pode ser date, undefined ou null
-    canceledAt?: Date | null; 
+    canceledAt?: Date | null;
     createdAt: Date;
 }
 
@@ -18,8 +18,8 @@ export class Notification {
 
     private props: NotificationProps;
 
-    constructor(props: Replace<NotificationProps, { createdAt?: Date }>) {
-        this._id = randomUUID();
+    constructor(props: Replace<NotificationProps, { createdAt?: Date }>, id?: string) {
+        this._id = id ?? randomUUID(); // se o id existir eu uso ele senao(??)
         // a data de criacao pode ser opcional, ai incluimos uma nova caso nao seja mencionanda
         this.props = {
             ...props,
@@ -52,14 +52,20 @@ export class Notification {
     public get category(): string {
         return this.props.category;
     }
-    public set readAt(readAt: Date | null | undefined) {
-        this.props.readAt = readAt;
+
+    public read() {
+        this.props.readAt = new Date();
     }
+
+    public unread() {
+        this.props.readAt = null;
+    }
+
     public get readAt(): Date | null | undefined {
         return this.props.readAt;
     }
 
-    public cancel(){
+    public cancel() {
         this.props.canceledAt = new Date();
     }
 
